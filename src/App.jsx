@@ -1,35 +1,54 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// App.js
+import React from 'react';
+import { Canvas } from '@react-three/fiber';
+import { useLoader } from '@react-three/fiber';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { OrbitControls } from '@react-three/drei';
+import './index.css'; // Ensure Tailwind CSS is imported
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="flex h-screen">
+
+      {/* Right Side with the 3D Model */}
+      <div className="w-1/2">
+
+          <Canvas
+            camera={{ position: [0, 0, 5] }}
+            style={{ width: '50vw', height: '100vh' }}
+          >
+            {/* Load and display the GLTF model */}
+            <Scene />
+
+            {/* Add sufficient lighting */}
+            <ambientLight intensity={1} />
+            <directionalLight position={[10, 10, 10]} intensity={1} />
+
+            {/* Add basic controls */}
+            <OrbitControls />
+          </Canvas>
+
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <div className="w-1/2"> 
+        <h1>hello</h1>
+
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+function Scene() {
+  // Load the GLTF model from the public/models directory
+  const gltf = useLoader(GLTFLoader, '/models/old_computer/scene.gltf');
+
+  // Adjust scale and position
+  return (
+    <primitive
+      object={gltf.scene}
+      scale={[2, 2, 2]}
+      position={[0, -1, 0]}
+    />
+  );
+}
+
+export default App;
