@@ -1,14 +1,1 @@
-/* src/index.css */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-
-body {
-  background-color: rgb(255, 255, 255);
-}
-
-/* In your CSS file */
-.full-height {
-  height: 100vh;
-}
+@import 'bootstrap/dist/css/bootstrap.min.css';
