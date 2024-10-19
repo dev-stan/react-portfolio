@@ -5,7 +5,7 @@ function Navigation() {
     <Navbar variant="dark" expand="lg" style={{ backgroundColor: "#000000"}}>
       <Container className="d-flex justify-content-center my-2">
         <Navbar.Brand href="#home" className="led-heading">
-          Stanislaw Zalewski
+          Stanislaw Zalewski - What I do
         </Navbar.Brand>
       </Container>
     </Navbar>
