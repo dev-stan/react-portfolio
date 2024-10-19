@@ -1,12 +1,11 @@
 import { Row, Col } from 'react-bootstrap';
+import ProjectCard from './ProjectCard';
 function Projects() {
   return (
-    <Row style={{ backgroundColor: "#d3d3d3"}}>
-        <Col>
-            <h1 className="led-heading">Projects</h1>
+    <Row style={{ backgroundColor: "#CCC9DC", height: '100vh', width: '100vw', margin: 0 }}>
+        <Col className="ms-5">
+            < ProjectCard />
         </Col>
-
-
     </Row>
   );
 }
