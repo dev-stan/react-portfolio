@@ -11,7 +11,11 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { BsArrowDown } from 'react-icons/bs';
 import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
+
+import FlyingOldComputer from './components/models/FlyingOldComputer';
+import FlyingModel from './components/models/FlyingModel';
 import FlyingImage from './components/models/FlyingImage';
+import Scene from './components/three/Scene';
 import * as THREE from 'three';
 
 const bounceAnimation = keyframes`
@@ -79,8 +83,8 @@ function App() {
         <Canvas camera={{ position: [0, 2, 4] }} style={{ height: '100vh', width: '100vw' }} dpr={[1, 1.5]}>
           <Scene />
           <FlyingModel />
-          <FlyingOldComputer />
           <FlyingImage />
+          <FlyingOldComputer />
           <ambientLight intensity={1} />
           <directionalLight position={[10, 10, 10]} intensity={1} />
         </Canvas>
@@ -115,96 +119,6 @@ function App() {
         <Projects />
       </Row>
     </Container>
-  );
-}
-
-function Scene() {
-  const gltf = useLoader(GLTFLoader, '/models/stylized_ramen_bowl/scene.gltf');
-  const modelRef = useRef();
-
-  // Use useFrame for continuous animation
-  useFrame(() => {
-    if (modelRef.current) {
-      // Slightly rotate the model on every frame
-      modelRef.current.rotation.y += 0.005;
-    }
-  });
-
-  return (
-    <primitive
-      ref={modelRef}
-      object={gltf.scene}
-      scale={[12, 12, 12]}
-      position={[0, -1, 0]}
-    />
-  );
-}
-
-function FlyingModel() {
-  const speed = 0.05; // Speed of the model
-  const gltf = useLoader(GLTFLoader, '/models/joint/scene.gltf');
-  const modelRef = useRef();
-  const [position, setPosition] = useState([-30, 0, 0]);
-  const directionRef = useRef(1); // 1 for right, -1 for left
-
-  useFrame(() => {
-    if (modelRef.current) {
-      // Rotate the model in all directions
-      modelRef.current.rotation.x += speed * 0.1;
-      modelRef.current.rotation.y += speed * 0.2;
-      modelRef.current.rotation.z += speed * 0.1;
-
-      // Move the model from left to right across the entire screen and reset direction when offscreen
-      setPosition(([x, y, z]) => {
-        if (x > 30 || x < -30) {
-          directionRef.current *= -1; // Reverse direction
-        }
-        return [x + speed * directionRef.current, y, z];
-      });
-    }
-  });
-
-  return (
-    <primitive
-      ref={modelRef}
-      object={gltf.scene}
-      scale={[0.4, 0.4, 0.4]}
-      position={position}
-    />
-  );
-}
-
-function FlyingOldComputer() {
-  const speed = 0.05; // Speed of the model
-  const gltf = useLoader(GLTFLoader, '/models/old_computer/scene.gltf');
-  const modelRef = useRef();
-  const [position, setPosition] = useState([10, 0, 0]);
-  const directionRef = useRef(-1); // 1 for right, -1 for left
-
-  useFrame(() => {
-    if (modelRef.current) {
-      // Rotate the model in all directions
-      modelRef.current.rotation.x += 0.02;
-      modelRef.current.rotation.y += 0.04;
-      modelRef.current.rotation.z += 0.02;
-
-      // Move the model from right to left across the entire screen and reset direction when offscreen
-      setPosition(([x, y, z]) => {
-        if (x > 30 || x < -30) {
-          directionRef.current *= -1; // Reverse direction
-        }
-        return [x + speed * directionRef.current, y, z];
-      });
-    }
-  });
-
-  return (
-    <primitive
-      ref={modelRef}
-      object={gltf.scene}
-      scale={[0.2, 0.2, 0.2]}
-      position={position}
-    />
   );
 }
 
