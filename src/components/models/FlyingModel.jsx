@@ -18,6 +18,7 @@ function FlyingModel({ clicked, onClick }) {
       const z = orbitRadius * Math.sin(angleRef.current + initialAngleOffset);
       modelRef.current.position.set(x, 0, z);
       modelRef.current.rotation.y = -(angleRef.current + initialAngleOffset);
+      
     }
   });
 
@@ -26,6 +27,7 @@ function FlyingModel({ clicked, onClick }) {
     if (!clicked) {
       modelRef.current.position.set(0, 0, 0); // Center the model immediately
       modelRef.current.rotation.y = 0;
+      // Change the scale to 5,5,5
       onClick(); // Notify parent component about the click
     }
   };

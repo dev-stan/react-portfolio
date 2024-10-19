@@ -1,10 +1,8 @@
-/* eslint-disable react/no-unknown-property */
-
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'react-bootstrap';
-import { Canvas } from '@react-three/fiber';
+import { Canvas, useThree } from '@react-three/fiber';
 import FlyingModel from './components/models/FlyingModel';
 import FlyingOldComputer from './components/models/FlyingOldComputer';
 import FlyingBackpack from './components/models/FlyingBackpack';
@@ -12,6 +10,10 @@ import RamenBowl from './components/models/RamenBowl';
 import Navigation from './components/ui/Navigation';
 import Projects from './components/ui/Projects';
 import useTyped from './components/hooks/UseTyped';
+import CameraControls from './components/three/CameraControls';
+
+
+// Helper function to update camera position
 
 function App() {
   const [clicked, setClicked] = useState(false);
@@ -48,10 +50,11 @@ function App() {
             }}
           >
             <Canvas
-              camera={{ position: [0, 2, 4] }}
+              camera={{ position: [0, 2, 4] }} // Initial camera position
               style={{ height: '100vh', width: '100%' }}
               dpr={[1, 1.5]}
             >
+              <CameraControls clicked={clicked} /> {/* Adjust camera on click */}
               <FlyingModel clicked={clicked} onClick={handleModelClick} />
               <ambientLight intensity={1} />
               <directionalLight position={[10, 10, 10]} intensity={1} />
@@ -82,7 +85,7 @@ function App() {
           }}
         >
           <Canvas
-            camera={{ position: [0, 2, 4] }}
+            camera={{ position: [0, 2, 4] }} // Initial camera position
             style={{ height: '100vh', width: '100vw' }}
             dpr={[1, 1.5]}
           >
