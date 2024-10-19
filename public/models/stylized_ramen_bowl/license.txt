@@ -1,0 +1,8 @@
+Model Information:
+* title:	Stylized Ramen Bowl 🍜
+* source:	https://sketchfab.com/3d-models/stylized-ramen-bowl-6d4d6a4951cf4f078e16468594940c3f
+* author:	Agustín Hönnun (https://sketchfab.com/Agustin_Honnun)
+
+Model License:
+* license type:	SKETCHFAB Standard (https://sketchfab.com/licenses)
+* requirements:	Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works

@@ -1,0 +1,311 @@
+{
+  "accessors": [
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 9179,
+      "max": [
+        20.66785430908203,
+        20.013233184814453,
+        14.243681907653809
+      ],
+      "min": [
+        -18.249984741210938,
+        0.0,
+        -12.96080493927002
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 110148,
+      "componentType": 5126,
+      "count": 9179,
+      "max": [
+        0.9999800324440002,
+        1.0,
+        0.9999799728393555
+      ],
+      "min": [
+        -0.9999799132347107,
+        -1.0,
+        -0.9999799132347107
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 9179,
+      "max": [
+        0.9999919533729553,
+        0.9999985098838806,
+        0.9999986290931702,
+        1.0
+      ],
+      "min": [
+        -0.9998596906661987,
+        -0.9999943971633911,
+        -0.9997324347496033,
+        1.0
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 9179,
+      "max": [
+        0.9942856431007385,
+        0.9964515566825867
+      ],
+      "min": [
+        0.0007158726220950484,
+        0.0007158510270528495
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 73432,
+      "componentType": 5126,
+      "count": 9179,
+      "max": [
+        0.9942856431007385,
+        0.9964515566825867
+      ],
+      "min": [
+        0.0007158726220950484,
+        0.0007158510270528495
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 146864,
+      "componentType": 5126,
+      "count": 9179,
+      "max": [
+        0.9942856431007385,
+        0.9964515566825867
+      ],
+      "min": [
+        0.0007158726220950484,
+        0.0007158510270528495
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 46176,
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "Agustín Hönnun (https://sketchfab.com/Agustin_Honnun)",
+      "license": "SKETCHFAB Standard (https://sketchfab.com/licenses)",
+      "source": "https://sketchfab.com/3d-models/stylized-ramen-bowl-6d4d6a4951cf4f078e16468594940c3f",
+      "title": "Stylized Ramen Bowl 🍜"
+    },
+    "generator": "Sketchfab-16.33.0",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 184704,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 220296,
+      "byteOffset": 184704,
+      "byteStride": 8,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 220296,
+      "byteOffset": 405000,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 146864,
+      "byteOffset": 625296,
+      "byteStride": 16,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 772160,
+      "uri": "scene.bin"
+    }
+  ],
+  "extensionsUsed": [
+    "KHR_materials_specular"
+  ],
+  "images": [
+    {
+      "uri": "textures/RamenBowl_MAT_baseColor.png"
+    },
+    {
+      "uri": "textures/RamenBowl_MAT_metallicRoughness.png"
+    },
+    {
+      "uri": "textures/RamenBowl_MAT_normal.png"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "extensions": {
+        "KHR_materials_specular": {
+          "specularColorFactor": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "specularFactor": 0.0543534184864978
+        }
+      },
+      "name": "RamenBowl_MAT",
+      "normalTexture": {
+        "index": 2
+      },
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 0
+        },
+        "metallicRoughnessTexture": {
+          "index": 1
+        }
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "RamenBowl_RamenBowl_MAT_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TANGENT": 2,
+            "TEXCOORD_0": 3,
+            "TEXCOORD_1": 4,
+            "TEXCOORD_2": 5
+          },
+          "indices": 6,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "matrix": [
+        0.8333333134651184,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.850371663592295e-16,
+        -0.8333333134651184,
+        0.0,
+        0.0,
+        0.8333333134651184,
+        1.850371663592295e-16,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "Sketchfab_model"
+    },
+    {
+      "children": [
+        2
+      ],
+      "matrix": [
+        0.009999999776482582,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.009999999776482582,
+        0.0,
+        0.0,
+        -0.009999999776482582,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "ad92128548f4474caa5ea1f23eedb032.fbx"
+    },
+    {
+      "children": [
+        3
+      ],
+      "name": "RootNode"
+    },
+    {
+      "children": [
+        4
+      ],
+      "name": "RamenBowl"
+    },
+    {
+      "mesh": 0,
+      "name": "RamenBowl_RamenBowl_MAT_0"
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 10497,
+      "wrapT": 10497
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Sketchfab_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    },
+    {
+      "sampler": 0,
+      "source": 1
+    },
+    {
+      "sampler": 0,
+      "source": 2
+    }
+  ]
+}

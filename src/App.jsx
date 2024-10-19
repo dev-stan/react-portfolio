@@ -1,61 +1,64 @@
-// App.js
 import React, { useEffect, useRef } from 'react';
-import { Canvas } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { useLoader } from '@react-three/fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { OrbitControls } from '@react-three/drei';
-import Typed from 'typed.js'; // Import Typed.js
-import './index.css'; // Ensure Tailwind CSS is imported
+import Typed from 'typed.js';
+import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button } from 'react-bootstrap';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import Navigation from './Navigation';
+import Projects from './Projects';
+import { Container, Row, Col, Navbar } from 'react-bootstrap';
 
 function App() {
   return (
-    <Row>
+<Container fluid style={{ padding: 0, height: '100vh', overflowY: 'scroll', overflowX: 'hidden' }}>
+  <Navigation />
+  <Row
+    className="no-gutters"
+    style={{ background: '#161616', color: '#CCC9DC', margin: 0, height: '100vh', width: '100vw', overflowX: 'hidden' }}
+  >
+    {/* Left Side with the 3D Model */}
+    <Col style={{ padding: 0 }}>
+      <Canvas camera={{ position: [0, 2, 4] }} style={{ height: '100vh', width: '100%' }} dpr={[1, 1.5]}>
+        <Scene />
+        <ambientLight intensity={1} />
+        <directionalLight position={[10, 10, 10]} intensity={1} />
+      </Canvas>
+    </Col>
 
-      {/* Left Side with the 3D Model */}
-      <Col>
+    {/* Right Side with Typing Animation */}
+    <Col className="d-flex align-items-center" style={{ height: '100vh', textAlign: 'left' }}>
+      <h1 className="typing-header led-heading fs-5 w-50 mx-auto" style={{ display: 'inline-block' }}>
+        &nbsp;
+        <span ref={useTyped()} className="typed-text typed-fade-out"></span>
+      </h1>
+    </Col>
+  </Row>
+  <Row style={{ height: 'auto', width: '100vw', overflowX: 'hidden' }}>
+    <Projects />
+  </Row>
+</Container>
 
-        <Canvas
-          camera={{ position: [0, 0, 5] }}
-          style={{ width: '50vw', height: '100vh' }}
-        >
-          {/* Load and display the GLTF model */}
-          <Scene />
-
-          {/* Add sufficient lighting */}
-          <ambientLight intensity={1} />
-          <directionalLight position={[10, 10, 10]} intensity={1} />
-
-          {/* Add basic controls */}
-          <OrbitControls />
-        </Canvas>
-
-      </Col>
-
-      {/* Right Side with Typing Animation */}
-      <Col className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}> 
-        <h1 className="typing-header">
-          "Hey, I'm Stan&nbsp;
-          <span ref={useTyped()}></span>
-        </h1>
-      </Col>
-    </Row>
   );
 }
 
 function Scene() {
-  // Load the GLTF model from the public/models directory
-  const gltf = useLoader(GLTFLoader, '/models/old_computer/scene.gltf');
+  const gltf = useLoader(GLTFLoader, '/models/stylized_ramen_bowl/scene.gltf');
+  const modelRef = useRef();
 
-  // Adjust scale and position
+  // Use useFrame for continuous animation
+  useFrame(() => {
+    if (modelRef.current) {
+      // Slightly rotate the model on every frame
+      modelRef.current.rotation.y += 0.005;
+    }
+  });
+
   return (
     <primitive
+      ref={modelRef}
       object={gltf.scene}
-      scale={[2, 2, 2]}
+      scale={[12, 12, 12]}
       position={[0, -1, 0]}
     />
   );
@@ -68,12 +71,21 @@ function useTyped() {
     if (!typedElement.current) return;
 
     const typed = new Typed(typedElement.current, {
-      strings: ["{JavaScript}", "{Ruby on Rails}", "{React}", "HTML", "CSS"],
-      typeSpeed: 20,
-      backSpeed: 25,
+      strings: [
+        "Hey, I'm Stan - a Full Stack Developer!",
+        "I've been coding for over 5 years now!",
+        "I love building cool stuff with code, Ruby on Rails and React...",
+        'Scroll down and check out my projects!',
+      ],
+      typeSpeed: 28,
+      backSpeed: 10,
       loop: false,
+      backDelay: 2500,
       startDelay: 500,
-      showCursor: false,
+      showCursor: true,
+      fadeOut: true,
+      fadeOutClass: 'typed-fade-out',
+      fadeOutDelay: 500,
     });
 
     return () => {
