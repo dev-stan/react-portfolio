@@ -9,17 +9,13 @@ function useTyped() {
 
     const typed = new Typed(typedElement.current, {
       strings: [
-        "Hey, I'm Stan - a Full Stack Developer!",
-        "Oh wow! Something flew by!",
-        "I love building cool stuff with Ruby on Rails and React...",
-        "Welcome to my portfolio, damn I've got some nice stuff here",
-        "What you see are 3D models, thank Three.js for that...",
-        'Scroll down and check out my projects!',
+        "Oh Hey! I'm stan - I develop web apps...",
+        "Click on any of the rotating thingies - just do it... DO IT!"
       ],
       typeSpeed: 28,
       backSpeed: 10,
       loop: false,
-      backDelay: 7000,
+      backDelay: 3000,
       startDelay: 500,
       showCursor: true,
       fadeOut: true,

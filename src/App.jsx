@@ -1,32 +1,20 @@
 /* eslint-disable react/no-unknown-property */
 
 import { useState } from 'react';
-
-// Style imports
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'react-bootstrap';
-
-// ThreeJs imports
 import { Canvas } from '@react-three/fiber';
-
-// ThreeJs model imports
 import FlyingModel from './components/models/FlyingModel';
 import FlyingOldComputer from './components/models/FlyingOldComputer';
 import FlyingBackpack from './components/models/FlyingBackpack';
 import RamenBowl from './components/models/RamenBowl';
-
-// UI imports
 import Navigation from './components/ui/Navigation';
 import Projects from './components/ui/Projects';
-
-// Hook imports
 import useTyped from './components/hooks/UseTyped';
 
 function App() {
   const [clicked, setClicked] = useState(false);
-
-  // Move useTyped() to the top level so it's called on every render
   const typedRef = useTyped();
 
   const handleModelClick = () => {
@@ -64,12 +52,9 @@ function App() {
               style={{ height: '100vh', width: '100%' }}
               dpr={[1, 1.5]}
             >
-              <FlyingModel />
+              <FlyingModel clicked={clicked} onClick={handleModelClick} />
               <ambientLight intensity={1} />
-              <directionalLight
-                position={[10, 10, 10]}
-                intensity={1}
-              />
+              <directionalLight position={[10, 10, 10]} intensity={1} />
             </Canvas>
           </Col>
           <Col
@@ -102,17 +87,13 @@ function App() {
             dpr={[1, 1.5]}
           >
             <RamenBowl />
-            <FlyingModel onClick={handleModelClick} />
+            <FlyingModel clicked={clicked} onClick={handleModelClick} />
             <FlyingBackpack />
             <FlyingOldComputer />
             <ambientLight intensity={1} />
-            <directionalLight
-              position={[10, 10, 10]}
-              intensity={1}
-            />
+            <directionalLight position={[10, 10, 10]} intensity={1} />
           </Canvas>
 
-          {/* Left Column */}
           <Col
             className="d-flex align-items-center"
             style={{
@@ -122,7 +103,7 @@ function App() {
               left: 0,
               top: 0,
               width: '50%',
-              pointerEvents: 'none', // Allow clicks to pass through
+              pointerEvents: 'none',
             }}
           >
             <h1
@@ -136,7 +117,6 @@ function App() {
             </h1>
           </Col>
 
-          {/* Right Column */}
           <Col
             className="d-flex align-items-center"
             style={{
@@ -146,7 +126,7 @@ function App() {
               right: 0,
               top: 0,
               width: '50%',
-              pointerEvents: 'none', // Allow clicks to pass through
+              pointerEvents: 'none',
             }}
           >
             <h1
