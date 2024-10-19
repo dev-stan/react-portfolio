@@ -11,6 +11,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { BsArrowDown } from 'react-icons/bs';
 import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
+import * as THREE from 'three';
 
 const bounceAnimation = keyframes`
   0%, 100% {
@@ -71,24 +72,32 @@ function App() {
       <Navigation />
       <Row
         className="no-gutters"
-        style={{ background: '#161616', color: '#CCC9DC', margin: 0, minHeight: '100vh', width: '100vw', overflowX: 'hidden', position: 'relative' }}
+        style={{ background: '#0c0c0c', color: '#CCC9DC', margin: 0, minHeight: '100vh', width: '100vw', overflowX: 'hidden', position: 'relative' }}
       >
         {/* Canvas with the 3D Models */}
         <Canvas camera={{ position: [0, 2, 4] }} style={{ height: '100vh', width: '100vw' }} dpr={[1, 1.5]}>
           <Scene />
           <FlyingModel />
           <FlyingOldComputer />
+          <FlyingImage />
           <ambientLight intensity={1} />
           <directionalLight position={[10, 10, 10]} intensity={1} />
         </Canvas>
+        <Col className="d-flex align-items-center" style={{ height: '100vh', textAlign: 'left', position: 'absolute', left: 0, top: 0, width: '50%' }}>
+        <h1 className="typing-header led-heading fs-2 w-50 ps-5 pb-3" style={{ display: 'inline-block' }}>
+            Welcome to my portfolio. <br/><br/>
+            Enjoy the ramen...
+          </h1>
+        </Col>
 
-        {/* Right Side with Typing Animation */}
         <Col className="d-flex align-items-center" style={{ height: '100vh', textAlign: 'left', position: 'absolute', right: 0, top: 0, width: '50%' }}>
-          <h1 className="typing-header led-heading fs-5 w-50 mx-auto" style={{ display: 'inline-block' }}>
+          <h1 className="typing-header led-heading fs-5 w-50" style={{ display: 'inline-block', marginLeft: '40%' }}>
             &nbsp;
             <span ref={useTyped()} className="typed-text typed-fade-out"></span>
           </h1>
         </Col>
+
+
       </Row>
       {arrowVisible && (
         <div style={{ position: 'absolute', bottom: '20px', width: '100%', textAlign: 'center' }}>
@@ -131,7 +140,6 @@ function Scene() {
 }
 
 function FlyingModel() {
-  const frequency = 0.01; // Frequency of the model appearance
   const speed = 0.05; // Speed of the model
   const gltf = useLoader(GLTFLoader, '/models/joint/scene.gltf');
   const modelRef = useRef();
@@ -159,7 +167,7 @@ function FlyingModel() {
     <primitive
       ref={modelRef}
       object={gltf.scene}
-      scale={[1, 1, 1]}
+      scale={[0.4, 0.4, 0.4]}
       position={position}
     />
   );
@@ -199,6 +207,38 @@ function FlyingOldComputer() {
   );
 }
 
+function FlyingImage() {
+  const speed = 0.005; // Speed of the image rotation
+  const texture = useLoader(THREE.TextureLoader, 'https://avatars.githubusercontent.com/u/67323109?s=400&u=9a0445a323a0ab3fee6e50b04bef3126408f34ac&v=4');
+  const planeRef = useRef();
+  const radius = 0.5; // Radius of the circular path
+  const angleRef = useRef(0); // Angle for circular rotation
+
+  useFrame(() => {
+    if (planeRef.current) {
+      // Rotate the image slightly
+      planeRef.current.rotation.y += speed * 0.5;
+      planeRef.current.rotation.z += speed * 0.5;
+
+      // Update the angle for circular movement
+      angleRef.current += speed;
+
+      // Calculate the new position based on the angle for a more dynamic movement around the center
+      const x = (radius + 5 * Math.sin(angleRef.current * 0.5)) * Math.cos(angleRef.current);
+      const z = (radius + 5 * Math.sin(angleRef.current * 0.5)) * Math.sin(angleRef.current);
+
+      planeRef.current.position.set(x, 0, z);
+    }
+  });
+
+  return (
+    <mesh ref={planeRef}>
+      <planeGeometry args={[0.85, 0.85]} />
+      <meshBasicMaterial map={texture} side={THREE.DoubleSide} transparent />
+    </mesh>
+  );
+}
+
 function useTyped() {
   const typedElement = useRef(null);
 
@@ -208,19 +248,21 @@ function useTyped() {
     const typed = new Typed(typedElement.current, {
       strings: [
         "Hey, I'm Stan - a Full Stack Developer!",
-        "I've been coding for over 5 years now!",
-        "I love building cool stuff with code, Ruby on Rails and React...",
+        "Oh wow! Something flew by!",
+        "I love building cool stuff with Ruby on Rails and React...",
+        "Welcome to my portfolio, damn I've got some nice stuff here",
+        "What you see are 3D models, thank Three.js for that...",
         'Scroll down and check out my projects!',
       ],
       typeSpeed: 28,
       backSpeed: 10,
       loop: false,
-      backDelay: 2500,
+      backDelay: 7000,
       startDelay: 500,
       showCursor: true,
       fadeOut: true,
       fadeOutClass: 'typed-fade-out',
-      fadeOutDelay: 500,
+      fadeOutDelay: 1000,
     });
 
     return () => {
