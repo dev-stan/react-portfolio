@@ -1,27 +1,28 @@
+/* eslint-disable react/no-unknown-property */
 import { useFrame, useLoader } from '@react-three/fiber';
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 function FlyingOldComputer() {
-  const speed = 0.05; // Speed of the model
+  const speed = 0.01; // Speed of the model
   const gltf = useLoader(GLTFLoader, '/models/old_computer/scene.gltf');
   const modelRef = useRef();
-  const directionRef = useRef(-1); // 1 for right, -1 for left
+  const angleRef = useRef(0); // Track the current angle of rotation
+  const orbitRadius = 2.2; // Radius of the circular orbit around the bowl
+  const initialAngleOffset = (2 * Math.PI) / 3 * 2; // Offset to ensure equal spacing with 3 models
 
   useFrame(() => {
     if (modelRef.current) {
-      // Rotate the model in all directions
-      modelRef.current.rotation.x += 0.02;
-      modelRef.current.rotation.y += 0.04;
-      modelRef.current.rotation.z += 0.02;
+      // Increment the angle for smooth orbiting
+      angleRef.current += speed;
 
-      // Move the model from right to left across the entire screen
-      modelRef.current.position.x += speed * directionRef.current;
+      // Update the position of the model based on the angle for circular orbit
+      const x = orbitRadius * Math.cos(angleRef.current + initialAngleOffset);
+      const z = orbitRadius * Math.sin(angleRef.current + initialAngleOffset);
+      modelRef.current.position.set(x, 0, z);
 
-      // Reverse direction when offscreen
-      if (modelRef.current.position.x > 30 || modelRef.current.position.x < -30) {
-        directionRef.current *= -1; // Reverse direction
-      }
+      // Rotate the model to face towards the bowl as it orbits
+      modelRef.current.rotation.y = -(angleRef.current + initialAngleOffset);
     }
   });
 
@@ -30,7 +31,6 @@ function FlyingOldComputer() {
       ref={modelRef}
       object={gltf.scene}
       scale={[0.2, 0.2, 0.2]}
-      position={[10, 0, 0]}
     />
   );
 }

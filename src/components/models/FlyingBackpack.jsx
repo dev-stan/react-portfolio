@@ -3,13 +3,13 @@ import { useFrame, useLoader } from '@react-three/fiber';
 import { useRef } from 'react';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
-function FlyingModel() {
-  const gltf = useLoader(GLTFLoader, '/models/tree/scene.gltf');
+function FlyingBackpack() {
+  const gltf = useLoader(GLTFLoader, '/models/backpack/scene.gltf');
   const modelRef = useRef();
   const orbitRadius = 2.2; // Radius of the circular orbit around the bowl
   const speed = 0.01; // Speed of the orbit
   const angleRef = useRef(0); // Track the current angle of rotation
-  const initialAngleOffset = 0; // Offset to ensure equal spacing with 3 models
+  const initialAngleOffset = (2 * Math.PI) / 3;// Offset to ensure equal spacing with 3 models
 
   useFrame(() => {
     if (modelRef.current) {
@@ -30,9 +30,9 @@ function FlyingModel() {
     <primitive
       ref={modelRef}
       object={gltf.scene}
-      scale={[0.6, 0.6, 0.6]}
+      scale={[0.002, 0.002, 0.002]}
     />
   );
 }
 
-export default FlyingModel;
+export default FlyingBackpack;

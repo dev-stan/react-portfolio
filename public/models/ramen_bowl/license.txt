@@ -1,11 +1,8 @@
 Model Information:
-* title:	RAMEN BOWL
-* source:	https://sketchfab.com/3d-models/ramen-bowl-3d04380080ff4c269fe0ddd9b6924a3f
-* author:	Diego Clemente (https://sketchfab.com/diegoclemente2001)
+* title:	Stylized Ramen Bowl 🍜
+* source:	https://sketchfab.com/3d-models/stylized-ramen-bowl-6d4d6a4951cf4f078e16468594940c3f
+* author:	Agustín Hönnun (https://sketchfab.com/Agustin_Honnun)
 
 Model License:
-* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
-* requirements:	Author must be credited. Commercial use is allowed.
-
-If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
-This work is based on "RAMEN BOWL" (https://sketchfab.com/3d-models/ramen-bowl-3d04380080ff4c269fe0ddd9b6924a3f) by Diego Clemente (https://sketchfab.com/diegoclemente2001) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* license type:	SKETCHFAB Standard (https://sketchfab.com/licenses)
+* requirements:	Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works

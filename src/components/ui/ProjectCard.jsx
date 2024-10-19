@@ -1,4 +1,5 @@
-import React, { useRef } from 'react';
+/* eslint-disable react/no-unknown-property */
+import { useRef } from 'react';
 import { Canvas, useFrame, useLoader } from '@react-three/fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 

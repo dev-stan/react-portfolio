@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unknown-property */
 
 
 import { useRef } from 'react';
@@ -13,8 +14,8 @@ import { Canvas} from '@react-three/fiber';
 // ThreeJs model imports
 import FlyingOldComputer from './components/models/FlyingOldComputer';
 import FlyingModel from './components/models/FlyingModel';
-import FlyingImage from './components/models/FlyingImage';
-import Scene from './components/three/Scene';
+import FlyingBackpack from './components/models/FlyingBackpack';
+import RamenBowl from './components/models/RamenBowl';
 
 // UI imports
 import Navigation from './components/ui/Navigation';
@@ -34,9 +35,9 @@ function App() {
 
       <Row className="no-gutters" style={{ background: '#0c0c0c', color: '#CCC9DC', margin: 0, minHeight: '100vh', width: '100vw', overflowX: 'hidden', position: 'relative' }}>
         <Canvas camera={{ position: [0, 2, 4] }} style={{ height: '100vh', width: '100vw' }} dpr={[1, 1.5]}>
-          <Scene />
+          <RamenBowl />
           <FlyingModel />
-          <FlyingImage />
+          <FlyingBackpack />
           <FlyingOldComputer />
           <ambientLight intensity={1} />
           <directionalLight position={[10, 10, 10]} intensity={1} />

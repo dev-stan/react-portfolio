@@ -3,8 +3,8 @@ import { useRef } from 'react';
 import { useFrame, useLoader } from '@react-three/fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
-function Scene() {
-  const gltf = useLoader(GLTFLoader, '/models/stylized_ramen_bowl/scene.gltf');
+function RamenBowl() {
+  const gltf = useLoader(GLTFLoader, '/models/ramen_bowl/scene.gltf');
   const modelRef = useRef();
 
   // Use useFrame for continuous animation
@@ -25,4 +25,4 @@ function Scene() {
   );
 }
 
-export default Scene;
+export default RamenBowl;
