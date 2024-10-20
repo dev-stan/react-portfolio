@@ -1,7 +1,6 @@
 /* eslint-disable react/no-unknown-property */
 
-
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 // Style imports
 import './index.css';
@@ -9,13 +8,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'react-bootstrap';
 
 // ThreeJs imports
-import { Canvas} from '@react-three/fiber';
+import { Canvas } from '@react-three/fiber';
 
 // ThreeJs model imports
-import FlyingOldComputer from './components/models/FlyingOldComputer';
-import FlyingModel from './components/models/FlyingModel';
-import FlyingBackpack from './components/models/FlyingBackpack';
 import RamenBowl from './components/models/RamenBowl';
+import FlyingModel from './components/models/FlyingModel';
 
 // UI imports
 import Navigation from './components/ui/Navigation';
@@ -24,43 +21,131 @@ import Projects from './components/ui/Projects';
 // Hook imports
 import useTyped from './components/hooks/UseTyped';
 
-
 function App() {
-
   const projectsRef = useRef(null);
-  return (
-    <Container fluid style={{ padding: 0, height: '100vh', overflowY: 'scroll', overflowX: 'hidden', position: 'relative' }}>
+  const containerRef = useRef(null); // Reference to the Container
+  const [scrollPosition, setScrollPosition] = useState(0);
 
+  // Accumulate wheel delta
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    let accumulatedDelta = 0;
+
+    const handleWheel = (event) => {
+      accumulatedDelta += event.deltaY;
+      // Limit the accumulatedDelta if needed
+      accumulatedDelta = Math.max(0, accumulatedDelta);
+      setScrollPosition(accumulatedDelta);
+    };
+
+    container.addEventListener('wheel', handleWheel);
+
+    return () => {
+      container.removeEventListener('wheel', handleWheel);
+    };
+  }, []);
+
+  // Adjusted scrollPosition to prevent negative values
+  const adjustedScrollPosition = Math.max(0, scrollPosition);
+
+  // Calculate opacity for text fade-out and fade-in
+  const textOpacity = Math.max(1 - adjustedScrollPosition / 300, 0); // Adjust 300 to control fade-out speed
+  const newTextOpacity = Math.min(adjustedScrollPosition / 300, 1); // Adjust 300 as needed
+
+  return (
+    <Container
+      ref={containerRef} // Attach the ref to the Container
+      fluid
+      style={{
+        padding: 0,
+        height: '100vh',
+        overflowY: 'hidden', // Change to 'hidden' since we don't need scrolling
+        overflowX: 'hidden',
+        position: 'relative',
+      }}
+    >
       <Navigation />
 
-      <Row className="no-gutters" style={{ background: '#0c0c0c', color: '#CCC9DC', margin: 0, minHeight: '100vh', width: '100vw', overflowX: 'hidden', position: 'relative' }}>
-        <Canvas camera={{ position: [0, 2, 4] }} style={{ height: '100vh', width: '100vw' }} dpr={[1, 1.5]}>
-          <RamenBowl />
-          <FlyingModel />
-          <FlyingBackpack />
-          <FlyingOldComputer />
+      <Row
+        className="no-gutters"
+        style={{
+          background: '#0c0c0c',
+          color: '#CCC9DC',
+          margin: 0,
+          minHeight: '100vh',
+          width: '100vw',
+          overflowX: 'hidden',
+          position: 'relative',
+        }}
+      >
+        <Canvas
+          camera={{ position: [0, 2, 4] }}
+          style={{ height: '100vh', width: '100vw' }}
+          dpr={[1, 1.5]}
+        >
+          {/* Pass scrollPosition as a prop */}
+          <FlyingModel scrollPosition={adjustedScrollPosition}/>
+          <RamenBowl scrollPosition={adjustedScrollPosition} />
+          {/* Other models can be added here */}
           <ambientLight intensity={1} />
           <directionalLight position={[10, 10, 10]} intensity={1} />
         </Canvas>
 
-        <Col className="d-flex align-items-center" style={{ height: '100vh', textAlign: 'left', position: 'absolute', left: 0, top: 0, width: '50%' }}>
-          <h1 className="typing-header led-heading fs-2 w-50 ps-5 pb-3" style={{ display: 'inline-block' }}>
-              Enjoy the ramen...
-              <br/><br/>
-              Welcome to my portfolio.
+        {/* Existing Text */}
+        <Col
+          className="d-flex align-items-center"
+          style={{
+            height: '100vh',
+            textAlign: 'left',
+            position: 'absolute',
+            left: 0,
+            top: 0,
+            width: '50%',
+            opacity: textOpacity,
+            transition: 'opacity 0.5s ease',
+          }}
+        >
+          <h1
+            className="typing-header led-heading fs-2 w-50 ps-5 pb-3"
+            style={{ display: 'inline-block' }}
+          >
+            Enjoy the ramen...
+            <br />
+            <br />
+            Welcome to my portfolio.
           </h1>
         </Col>
 
-        <Col className="d-flex align-items-center" style={{ height: '100vh', textAlign: 'left', position: 'absolute', right: 0, top: 0, width: '50%' }}>
-          <h1 className="typing-header led-heading fs-5 w-50" style={{ display: 'inline-block', marginLeft: '40%' }}>
-            &nbsp;
-            <span ref={useTyped()} className="typed-text typed-fade-out"></span>
+        {/* New Text */}
+        <Col
+          className="d-flex align-items-center"
+          style={{
+            height: '100vh',
+            textAlign: 'left',
+            position: 'absolute',
+            left: 0,
+            top: 0,
+            width: '50%',
+            opacity: newTextOpacity,
+            transition: 'opacity 0.5s ease',
+          }}
+        >
+          <h1
+            className="new-text led-heading fs-2 w-50 ps-5 pb-3"
+            style={{ display: 'inline-block' }}
+          >
+            Here is some new text.
           </h1>
         </Col>
-
       </Row>
 
-      <Row ref={projectsRef} style={{ height: 'auto', width: '100vw', overflowX: 'hidden' }}>
+      {/* Since we don't need actual scrolling, you might want to adjust the Projects section */}
+      <Row
+        ref={projectsRef}
+        style={{ height: 'auto', width: '100vw', overflowX: 'hidden' }}
+      >
         <Projects />
       </Row>
     </Container>

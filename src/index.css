@@ -1,7 +1,7 @@
 
 @import 'bootstrap/dist/css/bootstrap.min.css';
 @import url('https://fonts.googleapis.com/css2?family=Sixtyfour+Convergence&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap');
 /* Ensure full height and width, and no overflow */
 html, body, #root {
     width: 100%;
