@@ -1,5 +1,3 @@
-/* eslint-disable react/no-unknown-property */
-
 import { useRef, useState, useEffect } from 'react';
 
 // Style imports
@@ -12,11 +10,9 @@ import { Canvas } from '@react-three/fiber';
 
 // ThreeJs model imports
 import RamenBowl from './components/models/RamenBowl';
-import FlyingModel from './components/models/FlyingModel';
 
 // UI imports
 import Navigation from './components/ui/Navigation';
-import Projects from './components/ui/Projects';
 
 // Hook imports
 import useTyped from './components/hooks/UseTyped';
@@ -24,6 +20,7 @@ import useTyped from './components/hooks/UseTyped';
 function App() {
   const projectsRef = useRef(null);
   const containerRef = useRef(null); // Reference to the Container
+  const typedRef = useTyped(); // Use the custom hook to get the reference
   const [scrollPosition, setScrollPosition] = useState(0);
 
   // Accumulate wheel delta
@@ -86,9 +83,7 @@ function App() {
           dpr={[1, 1.5]}
         >
           {/* Pass scrollPosition as a prop */}
-          <FlyingModel scrollPosition={adjustedScrollPosition}/>
           <RamenBowl scrollPosition={adjustedScrollPosition} />
-          {/* Other models can be added here */}
           <ambientLight intensity={1} />
           <directionalLight position={[10, 10, 10]} intensity={1} />
         </Canvas>
@@ -111,10 +106,7 @@ function App() {
             className="typing-header led-heading fs-2 w-50 ps-5 pb-3"
             style={{ display: 'inline-block' }}
           >
-            Enjoy the ramen...
-            <br />
-            <br />
-            Welcome to my portfolio.
+            <span ref={typedRef}></span> {/* Attach the ref here */}
           </h1>
         </Col>
 
@@ -139,14 +131,6 @@ function App() {
             Here is some new text.
           </h1>
         </Col>
-      </Row>
-
-      {/* Since we don't need actual scrolling, you might want to adjust the Projects section */}
-      <Row
-        ref={projectsRef}
-        style={{ height: 'auto', width: '100vw', overflowX: 'hidden' }}
-      >
-        <Projects />
       </Row>
     </Container>
   );

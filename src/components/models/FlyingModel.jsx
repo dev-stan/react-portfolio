@@ -3,8 +3,8 @@ import { useFrame, useLoader } from '@react-three/fiber';
 import { useRef } from 'react';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
-function FlyingModel() {
-  const gltf = useLoader(GLTFLoader, '/models/tree/scene.gltf');
+function FlyingModel({ scrollPosition }) {
+  const gltf = useLoader(GLTFLoader, '/models/joint/scene.gltf');
   const modelRef = useRef();
   const orbitRadius = 2.2; // Radius of the circular orbit around the bowl
   const speed = 0.01; // Speed of the orbit

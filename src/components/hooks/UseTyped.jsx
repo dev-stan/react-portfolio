@@ -10,10 +10,10 @@ function useTyped() {
     const typed = new Typed(typedElement.current, {
       strings: [
         "Hey, I'm Stan - a Full Stack Developer!",
-        "Oh wow! Something flew by!",
-        "I love building cool stuff with Ruby on Rails and React...",
+        'Oh wow! Something flew by!',
+        'I love building cool stuff with Ruby on Rails and React...',
         "Welcome to my portfolio, damn I've got some nice stuff here",
-        "What you see are 3D models, thank Three.js for that...",
+        'What you see are 3D models, thank Three.js for that...',
         'Scroll down and check out my projects!',
       ],
       typeSpeed: 28,

@@ -4,7 +4,7 @@ import { useFrame, useLoader } from '@react-three/fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 function RamenBowl({ scrollPosition }) {
-  const gltf = useLoader(GLTFLoader, '/models/ramen_bowl/scene.gltf');
+  const gltf = useLoader(GLTFLoader, '/scene.gltf');
   const modelRef = useRef();
   const scrollPositionRef = useRef(scrollPosition);
 
