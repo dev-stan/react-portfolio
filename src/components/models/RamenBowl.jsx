@@ -33,7 +33,7 @@ function RamenBowl({ scrollPosition }) {
     <primitive
       ref={modelRef}
       object={gltf.scene}
-      scale={[12, 12, 12]}
+      scale={[0.1, 0.1, 0.1]}
       position={[0, -1, 0]}
     />
   );
