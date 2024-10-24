@@ -10,6 +10,7 @@ import { Canvas } from '@react-three/fiber';
 
 // ThreeJs model imports
 import RamenBowl from './components/models/RamenBowl';
+import FlyingModel from './components/models/FlyingModel';
 
 // UI imports
 import Navigation from './components/ui/Navigation';
@@ -78,13 +79,14 @@ function App() {
         }}
       >
         <Canvas
-          camera={{ position: [0, 2, 4] }}
+          camera={{ position: [7/3, 14/3, 21/3] }}
           style={{ height: '100vh', width: '100vw' }}
           dpr={[1, 1.5]}
         >
           {/* Pass scrollPosition as a prop */}
+          <FlyingModel scrollPosition={adjustedScrollPosition} />
           <RamenBowl scrollPosition={adjustedScrollPosition} />
-          <ambientLight intensity={1} />
+          <ambientLight intensity={1} /> 
           <directionalLight position={[5, 10, 7.5]} intensity={1} />
         </Canvas>
 
