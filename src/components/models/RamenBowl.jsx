@@ -13,21 +13,6 @@ function RamenBowl({ scrollPosition }) {
     scrollPositionRef.current = scrollPosition;
   }, [scrollPosition]);
 
-  useFrame(() => {
-    if (modelRef.current) {
-      // Rotate the model
-      modelRef.current.rotation.y += 0.000;
-
-      // Compute the target position
-      const targetX = scrollPositionRef.current * 0.1; // Adjust the factor as needed
-
-      // Interpolate the current position towards the target position
-      modelRef.current.position.x += (targetX - modelRef.current.position.x) * 0.01; // Adjust 0.1 for smoothness
-
-      // Optionally, you can dampen the movement even more by decreasing the factor
-      // modelRef.current.position.x += (targetX - modelRef.current.position.x) * 0.05;
-    }
-  });
 
   return (
     <primitive
